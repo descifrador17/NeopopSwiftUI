@@ -90,7 +90,7 @@ struct FlatButton: ButtonStyle {
             .animation(.none, value: configuration.isPressed)
         }
         .allowsHitTesting(isButtonTapAllowed(buttonState: buttonState))
-        .clipShape(Rectangle().path(in: CGRect(x: 0, y: 0, width: buttonModel.buttonWidth ?? .infinity, height: buttonModel.buttonHeight ?? .infinity)))
+        .clipShape(Rectangle().path(in: CGRect(x: 0, y: 0, width: buttonModel.buttonWidth ?? UIScreen.main.bounds.width, height: buttonModel.buttonHeight ?? UIScreen.main.bounds.height)))
     }
     
     private func calcHStackAlignment(buttonDirection: NeopopButtonDirection) -> VerticalAlignment {

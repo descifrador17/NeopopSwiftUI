@@ -13,7 +13,7 @@ struct PlunkButton: ButtonStyle {
     var buttonModel: NeopopButtonModel
     
     @State var buttonState: NeopopButtonState?
-
+    
     func makeBody(configuration: Configuration) -> some View {
         ZStack(alignment: calcZStackAlignment(buttonDirection: buttonModel.buttonDirection)){
             if !configuration.isPressed {
@@ -64,43 +64,89 @@ struct PlunkButton: ButtonStyle {
                 .transition(.identity)
             }
             
-            VStack(alignment: .center, spacing: 0) {
-                switch buttonState {
-                case .animating:
-                    LottieView(name: buttonModel.loadingLottieName ?? "", loopMode: .loop)
-                default:
-                    HStack(alignment: .center, spacing: 0){
+            HStack(alignment: .center, spacing: 0){
+                //left edge
+                if buttonModel.buttonDirection == .topLeft || buttonModel.buttonDirection == .leftEdge || buttonModel.buttonDirection == .bottomLeft {
+                    Rectangle()
+                        .foregroundColor(.clear)
+                        .frame(width: buttonModel.edgeThickness, height: buttonModel.buttonHeight)
+                        .transformEffect(getCGAffineTransformForLeftEdge(buttonDirection: buttonModel.buttonDirection))
+                        .rotation3DEffect(buttonModel.buttonDirection == .leftEdge ? .degrees(-45) : .degrees(0), axis: (0, 1, 0), anchor: .trailing, anchorZ: 0, perspective: 1)
+                }
+                
+                VStack(alignment: .center, spacing: 0){
+                    //top edge
+                    if buttonModel.buttonDirection == .topLeft || buttonModel.buttonDirection == .topEdge || buttonModel.buttonDirection == .topRight {
+                        Rectangle()
+                            .foregroundColor(.clear)
+                            .frame(width: buttonModel.buttonWidth, height: buttonModel.edgeThickness)
+                            .transformEffect(getCGAffineTransformForTopEdge(buttonDirection: buttonModel.buttonDirection))
+                            .rotation3DEffect(buttonModel.buttonDirection == .topEdge ? .degrees(45) : .degrees(0), axis: (1, 0, 0), anchor: .bottom, anchorZ: 0, perspective: 1)
+                    }
+                    
+                    //center
+                    VStack(alignment: .center, spacing: 0) {
                         Spacer()
-                        //leftImage
-                        if let leftImage = buttonModel.leftImage {
-                            Image(uiImage: leftImage)
-                                .renderingMode(.template)
-                                .padding(.trailing, 6)
-                                .padding(.bottom, 2)
-                        }
-                        //label
-                        configuration.label
-                            .font(.custom(buttonModel.fontName ?? "NotoSansMyanmar-Bold", size: buttonModel.fontSize ?? 14))
-                            .padding(.horizontal,6)
-                        //rightImage
-                        if let rightImage = buttonModel.rightImage {
-                            Image(uiImage: rightImage)
-                                .renderingMode(.template)
-                                .padding(.trailing, 6)
-                                .padding(.bottom, 2)
+                        switch buttonState {
+                        case .animating:
+                            LottieView(name: buttonModel.loadingLottieName ?? "", loopMode: .loop)
+                                .frame(width: buttonModel.buttonWidth, height: buttonModel.buttonHeight, alignment: .center)
+                        default:
+                            HStack(alignment: .center, spacing: 0){
+                                Spacer()
+                                //leftImage
+                                if let leftImage = buttonModel.leftImage {
+                                    Image(uiImage: leftImage)
+                                        .renderingMode(.template)
+                                        .padding(.trailing, 6)
+                                        .padding(.bottom, 2)
+                                }
+                                //label
+                                configuration.label
+                                    .font(.custom(buttonModel.fontName ?? "NotoSansMyanmar-Bold", size: buttonModel.fontSize ?? 14))
+                                    .padding(.horizontal,6)
+                                //rightImage
+                                if let rightImage = buttonModel.rightImage {
+                                    Image(uiImage: rightImage)
+                                        .renderingMode(.template)
+                                        .padding(.trailing, 6)
+                                        .padding(.bottom, 2)
+                                }
+                                Spacer()
+                            }
                         }
                         Spacer()
                     }
+                    .frame(width: buttonModel.buttonWidth, height: buttonModel.buttonHeight, alignment: .center)
+                    .border(Color(buttonModel.borderColor ?? .clear), width: buttonModel.borderWidth ?? 0)
+                    .foregroundColor(Color(buttonModel.fontColor ?? .clear))
+                    .background(Color(buttonModel.backgroundColor ?? .clear))
+                    
+                    //bottom edge
+                    if buttonModel.buttonDirection == .bottomLeft || buttonModel.buttonDirection == .bottomEdge || buttonModel.buttonDirection == .bottomRight {
+                        Rectangle()
+                            .foregroundColor(.clear)
+                            .frame(width: buttonModel.buttonWidth, height: buttonModel.edgeThickness)
+                            .transformEffect(getCGAffineTransformForBottomEdge(buttonDirection: buttonModel.buttonDirection))
+                            .rotation3DEffect(buttonModel.buttonDirection == .bottomEdge ? .degrees(-45) : .degrees(0), axis: (1, 0, 0), anchor: .top, anchorZ: 0, perspective: 1)
+                        
+                    }
                 }
+
+                //right edge
+                if buttonModel.buttonDirection == .rightEdge || buttonModel.buttonDirection == .topRight || buttonModel.buttonDirection == .bottomRight {
+                    Rectangle()
+                        .foregroundColor(.clear)
+                        .frame(width: buttonModel.edgeThickness, height: buttonModel.buttonHeight)
+                        .transformEffect(getCGAffineTransformForRightEdge(buttonDirection: buttonModel.buttonDirection))
+                        .rotation3DEffect(buttonModel.buttonDirection == .rightEdge ? .degrees(45) : .degrees(0), axis: (0, 1, 0), anchor: .leading, anchorZ: 0, perspective: 1)
+                }
+                
             }
-            .frame(width: buttonModel.buttonWidth, height: buttonModel.buttonHeight, alignment: .center)
-            .border(Color(buttonModel.borderColor ?? .clear), width: buttonModel.borderWidth ?? 0)
-            .foregroundColor(Color(buttonModel.fontColor ?? .clear))
-            .background(Color(buttonModel.backgroundColor ?? .clear))
-            .offset(x: configuration.isPressed ? getButtonPressOffset(buttonDirection: buttonModel.buttonDirection).0 : 0 , y: configuration.isPressed ? getButtonPressOffset(buttonDirection: buttonModel.buttonDirection).1 : 0)
-            .scaleEffect(x: getXYScale(state: configuration.isPressed, buttonDirection: buttonModel.buttonDirection), y: getXYScale(state: configuration.isPressed, buttonDirection: buttonModel.buttonDirection), anchor: getScaleAnchor(buttonDirection: buttonModel.buttonDirection))
-            .animation(.none, value: configuration.isPressed)
         }
+        .offset(x: configuration.isPressed ? getButtonPressOffset(buttonDirection: buttonModel.buttonDirection).0 : 0 , y: configuration.isPressed ? getButtonPressOffset(buttonDirection: buttonModel.buttonDirection).1 : 0)
+        .scaleEffect(x: getXYScale(state: configuration.isPressed, buttonDirection: buttonModel.buttonDirection), y: getXYScale(state: configuration.isPressed, buttonDirection: buttonModel.buttonDirection), anchor: getScaleAnchor(buttonDirection: buttonModel.buttonDirection))
+        .animation(.none, value: configuration.isPressed)
         .allowsHitTesting(isButtonTapAllowed(buttonState: buttonState))
     }
     
@@ -194,7 +240,7 @@ struct PlunkButton: ButtonStyle {
         let displacement = (buttonModel.edgeThickness ?? 0) / tan(1)
         switch buttonDirection {
         case .topLeft:
-           tx = -displacement; ty = -displacement
+            tx = -displacement; ty = -displacement
         case .topEdge:
             tx = 0; ty = -(displacement * sin(0.785))
         case .topRight:
@@ -202,13 +248,13 @@ struct PlunkButton: ButtonStyle {
         case .leftEdge:
             tx = -(displacement * sin(0.785)); ty = 0
         case .rightEdge:
-           tx = (displacement * sin(0.785)); ty = 0
+            tx = (displacement * sin(0.785)); ty = 0
         case .bottomLeft:
             tx = -displacement; ty = displacement
         case .bottomEdge:
-           tx = 0; ty = (displacement * sin(0.785))
+            tx = 0; ty = (displacement * sin(0.785))
         case .bottomRight:
-           tx = displacement; ty = displacement
+            tx = displacement; ty = displacement
         }
         return (tx, ty)
     }

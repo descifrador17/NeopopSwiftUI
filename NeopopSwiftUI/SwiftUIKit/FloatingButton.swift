@@ -29,23 +29,28 @@ struct FloatingButton: ButtonStyle {
             VStack(alignment: .center, spacing: 0) {
                 HStack {
                     Spacer()
-                    //leftImage
-                    if let leftImage = buttonModel.leftImage {
-                        Image(uiImage: leftImage)
-                            .renderingMode(.template)
-                            .padding(.trailing, 6)
-                            .padding(.bottom, 2)
-                    }
-                    //label
-                    configuration.label
-                        .font(.custom(buttonModel.fontName ?? "NotoSansMyanmar-Bold", size: buttonModel.fontSize ?? 14))
-                        .padding(.horizontal,6)
-                    //rightImage
-                    if let rightImage = buttonModel.rightImage {
-                        Image(uiImage: rightImage)
-                            .renderingMode(.template)
-                            .padding(.trailing, 6)
-                            .padding(.bottom, 2)
+                    switch buttonState{
+                    case .animating :
+                        LottieView(name: buttonModel.loadingLottieName ?? "", loopMode: .loop)
+                    default :
+                        //leftImage
+                        if let leftImage = buttonModel.leftImage {
+                            Image(uiImage: leftImage)
+                                .renderingMode(.template)
+                                .padding(.trailing, 6)
+                                .padding(.bottom, 2)
+                        }
+                        //label
+                        configuration.label
+                            .font(.custom(buttonModel.fontName ?? "NotoSansMyanmar-Bold", size: buttonModel.fontSize ?? 14))
+                            .padding(.horizontal,6)
+                        //rightImage
+                        if let rightImage = buttonModel.rightImage {
+                            Image(uiImage: rightImage)
+                                .renderingMode(.template)
+                                .padding(.trailing, 6)
+                                .padding(.bottom, 2)
+                        }
                     }
                     Spacer()
                 }

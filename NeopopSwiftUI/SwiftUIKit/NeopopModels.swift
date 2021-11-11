@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 public struct NeopopButtonModel{
-    var buttonHeight: CGFloat?
+    var buttonHeight: CGFloat? = 50
     
     var buttonWidth: CGFloat?
     
@@ -21,19 +21,19 @@ public struct NeopopButtonModel{
     
     var fontSize: CGFloat?
     
-    var fontColor: UIColor?
+    var fontColor: UIColor? = NPColor.popWhite500
     
-    var backgroundColor: UIColor?
+    var backgroundColor: UIColor? = NPColor.popBlack500
     
-    var edgeThickness: CGFloat?
+    var edgeThickness: CGFloat? = 10
     
-    var edgeColor: UIColor?
+    var edgeColor: UIColor? = NPColor.popBlack200
     
     var borderWidth: CGFloat?
     
     var borderColor: UIColor?
     
-    var shadowColor: UIColor?
+    var shadowColor: UIColor? = NPColor.popBlack500
     
     var loadingLottieName: String?
     

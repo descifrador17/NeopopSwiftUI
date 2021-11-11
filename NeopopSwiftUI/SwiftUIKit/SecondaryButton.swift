@@ -8,7 +8,7 @@
 import SwiftUI
 import Lottie
 
-struct Secondary: ButtonStyle {
+struct SecondaryButton: ButtonStyle {
     
     var buttonModel: NeopopButtonModel
     
@@ -82,7 +82,7 @@ struct Secondary: ButtonStyle {
             }
             .zIndex(1)
             .frame(width: buttonModel.buttonWidth, height: buttonModel.buttonHeight, alignment: .center)
-            .border(Color(buttonModel.borderColor ?? .clear), width: buttonModel.borderWidth ?? 0)
+            .border(Color(buttonModel.borderColor ?? NPColor.popWhite500), width: buttonModel.borderWidth ?? 1)
             .foregroundColor(Color(buttonModel.fontColor ?? .clear))
             .background(Color(buttonModel.backgroundColor ?? .clear))
             .offset(x: configuration.isPressed ? getButtonPressOffset(buttonDirection: buttonModel.buttonDirection).0 : 0 , y: configuration.isPressed ? getButtonPressOffset(buttonDirection: buttonModel.buttonDirection).1 : 0)
@@ -90,7 +90,7 @@ struct Secondary: ButtonStyle {
             .animation(.none, value: configuration.isPressed)
         }
         .allowsHitTesting(isButtonTapAllowed(buttonState: buttonState))
-        .clipShape(Rectangle().path(in: CGRect(x: 0, y: 0, width: buttonModel.buttonWidth ?? .infinity, height: buttonModel.buttonHeight ?? .infinity)))
+        .clipShape(Rectangle().path(in: CGRect(x: 0, y: 0, width: buttonModel.buttonWidth ?? UIScreen.main.bounds.width, height: buttonModel.buttonHeight ?? UIScreen.main.bounds.height)))
     }
     
     private func calcHStackAlignment(buttonDirection: NeopopButtonDirection) -> VerticalAlignment {
