@@ -70,6 +70,7 @@ struct PlunkButton: ButtonStyle {
                     LottieView(name: buttonModel.loadingLottieName ?? "", loopMode: .loop)
                 default:
                     HStack(alignment: .center, spacing: 0){
+                        Spacer()
                         //leftImage
                         if let leftImage = buttonModel.leftImage {
                             Image(uiImage: leftImage)
@@ -79,7 +80,7 @@ struct PlunkButton: ButtonStyle {
                         }
                         //label
                         configuration.label
-                            .font(.custom("NotoSansMyanmar-Bold", size: 14))
+                            .font(.custom(buttonModel.fontName ?? "NotoSansMyanmar-Bold", size: buttonModel.fontSize ?? 14))
                             .padding(.horizontal,6)
                         //rightImage
                         if let rightImage = buttonModel.rightImage {
@@ -88,6 +89,7 @@ struct PlunkButton: ButtonStyle {
                                 .padding(.trailing, 6)
                                 .padding(.bottom, 2)
                         }
+                        Spacer()
                     }
                 }
             }

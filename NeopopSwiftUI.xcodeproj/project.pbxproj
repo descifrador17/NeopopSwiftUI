@@ -23,6 +23,7 @@
 		3461C7E2273AE5EE00517D1E /* cta_success_dark.json in Resources */ = {isa = PBXBuildFile; fileRef = 3461C7E1273AE5EE00517D1E /* cta_success_dark.json */; };
 		3461C7E4273AF52800517D1E /* FlatButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3461C7E3273AF52700517D1E /* FlatButton.swift */; };
 		3461C7E6273AF5D800517D1E /* SecondaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3461C7E5273AF5D800517D1E /* SecondaryButton.swift */; };
+		3461C7E8273B7D0100517D1E /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3461C7E7273B7D0100517D1E /* FloatingButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		3461C7E1273AE5EE00517D1E /* cta_success_dark.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cta_success_dark.json; sourceTree = "<group>"; };
 		3461C7E3273AF52700517D1E /* FlatButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlatButton.swift; sourceTree = "<group>"; };
 		3461C7E5273AF5D800517D1E /* SecondaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryButton.swift; sourceTree = "<group>"; };
+		3461C7E7273B7D0100517D1E /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 				3461C79027396BD000517D1E /* PlunkButton.swift */,
 				3461C7E3273AF52700517D1E /* FlatButton.swift */,
 				3461C7E5273AF5D800517D1E /* SecondaryButton.swift */,
+				3461C7E7273B7D0100517D1E /* FloatingButton.swift */,
 				3461C792273970AF00517D1E /* NeopopModels.swift */,
 				3461C7A32739777300517D1E /* NeopopHelper.swift */,
 				3461C7D7273AC7E800517D1E /* LottieView.swift */,
@@ -205,6 +208,7 @@
 				3461C7A42739777300517D1E /* NeopopHelper.swift in Sources */,
 				3461C7D8273AC7E800517D1E /* LottieView.swift in Sources */,
 				3461C793273970AF00517D1E /* NeopopModels.swift in Sources */,
+				3461C7E8273B7D0100517D1E /* FloatingButton.swift in Sources */,
 				3461C7E4273AF52800517D1E /* FlatButton.swift in Sources */,
 				3461C77427395D3F00517D1E /* NeopopSwiftUIApp.swift in Sources */,
 			);

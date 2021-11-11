@@ -16,7 +16,7 @@ struct ContentView: View {
             Button(name){
                 print("hello")
             }
-            .buttonStyle(PlunkButton(buttonModel: NeopopHelper.primary50_plunk_button_model(style: .dark)))
+            .buttonStyle(FloatingButton(buttonModel: NeopopHelper.default_floating_button_model()))
         }
     }
 }

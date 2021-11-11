@@ -33,6 +33,8 @@ public struct NeopopButtonModel{
     
     var borderColor: UIColor?
     
+    var shadowColor: UIColor?
+    
     var loadingLottieName: String?
     
     var buttonDirection: NeopopButtonDirection
